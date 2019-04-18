@@ -7,13 +7,13 @@ Released under the GNU LGPL v3.0
 
 Dependencies
 
-    - pngcrush
+  - pngcrush
 
-    - #!/bin/sh and GNU coreutils
+  - #!/bin/sh and GNU coreutils
 
 
-`Usage: crushall.sh [OPTION]
+Usage: crushall.sh [OPTION]
 
     -h    human-readable size units
 
-    -v    show pngcrush output`
+    -v    show pngcrush output
