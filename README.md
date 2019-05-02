@@ -14,6 +14,8 @@ Dependencies
 
 Usage: crushall.sh [OPTION]
 
-    -h    human-readable size units
+    -t INT  set number of threads (default 4)
 
-    -v    show pngcrush output
+    -h      human-readable size units
+
+    -v      show pngcrush output
