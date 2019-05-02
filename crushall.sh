@@ -15,8 +15,9 @@ v_flag=''
 
 print_usage() {
     printf "Usage: crushall.sh [OPTION]\n\n \
-    -h    human-readable size units\n\n \
-    -v    show pngcrush output\n\n"
+    -t INT  set number of threads (default 4)\n\n \
+    -h      human-readable size units\n\n \
+    -v      show pngcrush output\n\n"
 }
 
 print_size() {
@@ -47,9 +48,14 @@ perform_crush() {
     fi
 }
 
-while getopts 'hv' flag
+while getopts 't:hv' flag
 do
     case "${flag}" in
+        t) case ${OPTARG} in
+               ''|0|*[!0-9]*) print_usage
+                              exit 1 ;;
+               *) mt_limit=${OPTARG} ;;
+           esac ;;
         h) h_flag='true' ;;
         v) v_flag='true' ;;
         *) print_usage
@@ -66,7 +72,7 @@ do
     old_size=$(stat --printf="%s" $png)
     old_sizes+=($old_size)
 
-    while [ $(jobs | wc -l) -ge $mt_limit ]; do
+    while [ $(jobs | awk '{print $2}' | grep Running | wc -l) -ge $mt_limit ]; do
         sleep $busy_wait_interval;
     done
     
